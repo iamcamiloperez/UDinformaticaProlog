@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prolog y JS</title>
+	<script type="text/javascript" src="tau-prolog/core.js"></script>
+	<script type="text/javascript" src="tau-prolog/lists.js"></script>
+	<style type="text/css">
+		.area{
+			width: 300px;
+    		height: 150px;
+		}
+
+		.nodo{
+			color: red;
+
+		}
+
+
+	</style>
+</head>
+<body>
+
+<h2>contagios</h2>
+<textarea class="area" id="contagios">
+contagio(alberto).
+</textarea>
+
+<h2>contactos</h2>
+<textarea class="area" id="contactos">
+contacto(alberto, juan).
+contacto(alberto, enrique).
+contacto(juan, robin).
+contacto(juan, alba).
+</textarea>
+
+<h2>evaluaci&oacute;n</h2>
+<!-- Name -->
+<input class="entrada" type="text" id="name"  value="" placeholder="Enter a name" />
+
+<!-- Button -->
+<input class="boton" type="button" value="evaluar" id="button" onClick="clickButton();" />
+
+<!-- Respuesta -->
+<div class="respuesta" id="result"></div>
+
+<script type="text/javascript">
+
+
+// onClick #button
+	function clickButton() {
+		var name = document.getElementById("name").value;
+		document.getElementById("result").innerHTML = "";
+		evaluar(name);		
+	}
+
+
+	function evaluar(nombre) {
+
+		var session = pl.create();
+		var contagios = document.getElementById("contagios").value;
+
+		var parsed = session.consult(":- use_module(library(lists))."+contagios+"contagio_en(Xs, X) :- member(X, Xs), contagio(X).");
+
+		if( parsed !== true ) {
+			console.log( parsed ); 
+		}
+		
+		var parsed = session.query("contagio_en(["+nombre+"], X).");
+
+		var callback = function( answer ){
+			var result = document.getElementById("result");
+			var res = pl.format_answer( answer )
+			console.log('respuesta');
+			console.log(res);			
+			if(res != 'false.'){						
+				result.innerHTML = "<div><h3>" + nombre + " - Positivo </h3></div>"
+				vercamino(nombre);
+			}else
+				result.innerHTML = "<div><h3>" + nombre + " - Negativo </h3></div>"
+		};
+		
+		session.answer( callback );
+	}
+
+	function vercamino(nombre, nodo = true) {
+		var session = pl.create();
+		var contactos = document.getElementById("contactos").value;		
+		session.consult(contactos);
+		session.query("contacto(" + nombre + ", X).");
+		session.answers(mostrarCamino(nombre,nodo), 1000);		
+	}
+
+	function mostrarCamino(nombre, nodo) {
+		// Return callback function
+		var result = document.getElementById("result");
+		return function(answer) {
+			// Valid answer
+			if(pl.type.is_substitution(answer)) {
+				var personas = answer.lookup("X");
+				if(nodo)
+					result.innerHTML = result.innerHTML + "<li class='nodo'><strong>" + personas.id + "</strong></li>";
+				else
+					result.innerHTML = result.innerHTML + "<li>" + personas.id + "</li>";
+				vercamino(personas.id, false);
+			}
+		};
+	}
+
+		
+</script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
