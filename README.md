@@ -1,11 +1,11 @@
 # UDinformaticaProlog
-Sistema de detección de mapa de contagios en prolog
-Validación de Reglas para sudoku
-Validación Sinonimos y Antonimos 
+- Sistema de detección de mapa de contagios en prolog
+- Validación de Reglas para sudoku
+- Validación Sinonimos y Antonimos 
 
 # Lenguajes
- Javascript 
- Python V.3
+ - Javascript 
+ - Python V.3
  
 # Interfaz gráfica
 - HTML
