@@ -1,8 +1,11 @@
 # UDinformaticaProlog
 Sistema de detección de mapa de contagios en prolog
+Validación de Reglas para sudoku
+Validación Sinonimos y Antonimos 
 
 # Lenguajes
  Javascript 
+ Python V.3
  
 # Interfaz gráfica
 - HTML
@@ -10,6 +13,7 @@ Sistema de detección de mapa de contagios en prolog
 
 # Herramienta Prolog:
 - Tau Prolog - Versión 0.2.83
+- pyswip
 
 ## ¿Qué es Tau Prolog?
 Tau Prolog es un intérprete de Prolog implementado completamente en JavaScript. Es una implementación de Prolog guiada por el estándar ISO Prolog. Lo que distingue a Tau Prolog de otros intérpretes ejecutados en el lado del servidor, es su capacidad de integración e interacción con los elementos de las páginas web. 
@@ -62,4 +66,13 @@ Si se encuentra una respuesta computada, esta se devuelve en un objeto del proto
 
 Para el ejercicio planteado se evalúa el camino de contactos que ha tenido una persona con base en unos conocimientos preestablecidos. 
 al indicar el nombre de una persona, si el sistema lo encuentra en su base de conocimientos como contagiado mostrará este resultado junto con el camino de contactos que ha tenido hasta n niveles. 
+
+## Autores
+_Universidad Distrital Francisco José de Caldas._
+_Esp. Ingeniería de Software._
+_Grupo 2_
+
+* **Cristhian Camilo Perez Veloza** - *Código* - 20201099042
+* **Daniel Julián Sanchez Alvarez** - *Código* - 20201099046
+* **Julia Liliana Sierra Rojas** - *Código* - 20201099047
 
